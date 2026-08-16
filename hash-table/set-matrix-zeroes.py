@@ -22,6 +22,6 @@ class Solution:
                 matrix[i][0] = 0
         
         if col0 == 0:
-            for j in range(len(matrix)):
+            for j in range(len(matrix[i])):
                 matrix[0][j] = 0
         

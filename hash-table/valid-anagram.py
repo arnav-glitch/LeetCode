@@ -6,6 +6,7 @@ class Solution:
         for i in s:
             if i not in counter1:
                 return False
+        for i in t:
             if i not in counter2:
                 return False
         return True

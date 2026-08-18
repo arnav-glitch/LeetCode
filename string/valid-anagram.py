@@ -1,12 +1,16 @@
-from collections import Counter
 class Solution:
     def isAnagram(self, s: str, t: str) -> bool:
-        counter1 = Counter(t)
-        counter2 = Counter(s)
+        hm = {}
+        if len(s) != len(t):
+            return False
         for i in s:
-            if i not in counter1:
-                return False
+            hm[i] = hm.get(i, 0) + 1
         for i in t:
-            if i not in counter2:
+            if i not in hm:
+                return False
+            else:
+                hm[i] -= 1
+        for items in hm:
+            if hm[items] != 0:
                 return False
         return True

@@ -1,14 +1,22 @@
 class Solution:
     def threeSum(self, nums: list[int]) -> list[list[int]]:
-        unique_set = set()
-        for i in range(len(nums)):
-            hm = set()
-            for j in range(i + 1, len(nums)):
-                third = -(nums[i] + nums[j])
-                if third in hm:
-                    temp = [nums[i], nums[j], third]
-                    temp.sort()
-                    unique_set.add(tuple(temp))
-                hm.add(nums[j])
-        result = [list(triplet) for triplet in unique_set]
-        return result
+        nums.sort()
+        ans = []
+        for i in range(len(nums) - 2):
+            if i > 0 and nums[i] == nums[i-1]: continue
+            j = i + 1
+            k = len(nums) - 1
+            while j < k:
+                total = nums[i] + nums[j] + nums[k]
+                if total < 0:
+                    j += 1
+                elif total > 0:
+                    k -= 1
+                else:
+                    triplet = [nums[i], nums[j], nums[k]]
+                    ans.append(triplet)
+                    j += 1
+                    k -= 1
+                    while j < k and nums[j] == nums[j-1]: j += 1
+                    while j < k and nums[k] == nums[k+1]: k -= 1
+        return ans

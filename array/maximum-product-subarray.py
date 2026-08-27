@@ -1,11 +1,12 @@
 class Solution:
     def maxProduct(self, nums: List[int]) -> int:
-        max_prod = min_prod = answer = nums[0]
-        for i in range(1, len(nums)):
-            current = nums[i]
-            new_max = max(current, max_prod * current, min_prod * current)
-            new_min = min(current, min_prod * current, max_prod * current)
-            max_prod = new_max
-            min_prod = new_min
-            answer = max(answer, new_max)
-        return answer        
+        prefix = suffix = 1
+        ans = float('-inf')
+        n = len(nums)
+        for i in range(n):
+            if prefix == 0: prefix = 1
+            if suffix == 0: suffix = 1
+            prefix *= nums[i]
+            suffix *= nums[n - i - 1]
+            ans = max(ans, max(prefix, suffix))
+        return ans  

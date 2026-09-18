@@ -6,6 +6,8 @@ class Solution:
         t_map = {}
         for ch in t:
             t_map[ch] = t_map.get(ch, 0) + 1
+        if len(t_map) < len(s_map):
+            return False
         for key, value in t_map.items():
             if key not in s_map:
                 return False
